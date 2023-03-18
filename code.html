@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>8x8 Grid with 32 Bombs</title>
+    <body style="background-color:#41B270;">
+    <style>
+      /* define the grid styles */
+      table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 400px;
+        height: 400px;
+        margin-top:10px;
+        margin-left:10px;
+      }
+      td {
+        width: 50px;
+        height: 50px;
+        border: 3px dotted rgb(0, 0, 0);
+        text-align: center;
+        vertical-align: middle;
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        background-color: #41B270;
+      }
+      /* define the bomb style */
+      .bomb {
+        background-color: #B24183;
+      }
+      /* define the life line style */
+      .life-line {
+        background-color: yellow;
+      }
+      /* define the destination style */
+      .destination {
+        background-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <!-- use a nested loop to generate the cells -->
+        <script>
+          var num_bombs = 28;
+          var num_cells = 64;
+          var num_lifelines=4;
+          var destination_cell=Math.floor(Math.random() * 11) + 43;          
+          var bomb_cells = new Set();
+          var lifeline_cells= new Set();
+
+          while (bomb_cells.size < num_bombs) {
+            var rand_index = Math.floor(Math.random() * num_cells);
+            bomb_cells.add(rand_index);
+          }
+          while (lifeline_cells.size < num_lifelines) {
+            var rand_index = Math.floor(Math.random() * destination_cell);
+            lifeline_cells.add(rand_index);
+          }
+        
+          for (var i = 7; i >= 0; i--) {
+            document.write('<tr>');
+            for (var j = 1; j <= 8; j++) {
+              var cell_index = i * 8 + j;
+              var cell_class = bomb_cells.has(cell_index) ? 'bomb' : '';
+              if (cell_index === destination_cell) { // add a life line to cell 52
+                cell_class = 'destination';
+              }
+              else if(lifeline_cells.has(cell_index)){
+                cell_class='life-line';
+              }
+              document.write('<td class="' + cell_class + '">' + cell_index + '</td>');
+            }
+            document.write('</tr>');
+          }
+        </script>
+      </tbody>
+    </table>
+  </body>
+</html>
