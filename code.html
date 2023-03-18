@@ -44,10 +44,10 @@
       <tbody>
         <!-- use a nested loop to generate the cells -->
         <script>
-          var num_bombs = 28;
+          var num_bombs = 26;
           var num_cells = 64;
           var num_lifelines=4;
-          var destination_cell=Math.floor(Math.random() * 11) + 43;          
+          var destination_cell = Math.floor(Math.random() * (54 - 43)) + 43;
           var bomb_cells = new Set();
           var lifeline_cells= new Set();
 
